@@ -4,7 +4,7 @@ const sora = Sora({ subsets: ["latin"] });
 const Newsletter = () => {
   return (
     <section
-      className={`${sora.className} h-[80vh] flex flex-col justify-end items-center`}
+      className={`${sora.className} h-[70vh] flex flex-col justify-end items-center`}
     >
       <div className="relative">
         <h2 className="text-8xl tracking-[3px] opacity-10 font-bold text-center">

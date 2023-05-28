@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+.padding {
   padding: 0rem 7rem;
 }
 .cart-icon {
@@ -29,4 +29,24 @@ body {
   border-radius: 50%;
   text-align: center;
   font-weight: 600;
+}
+.slide-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-card-content {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-card-hovered .slide-card-content {
+  transform: scale(1.5);
+}
+
+.product-name {
+  font-weight: 500;
+}
+.product-price {
+  font-weight: 800;
+  margin-top: 6px;
+  color: black;
 }

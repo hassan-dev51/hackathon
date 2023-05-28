@@ -2,6 +2,7 @@ import Checkout from "./components/Checkout";
 import Hero from "./components/Hero";
 import Newsletter from "./components/Newsletter";
 import Promotion from "./components/Promotion";
+import Unique from "./components/Unique";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <Promotion />
       <Checkout />
+      <Unique />
       <Newsletter />
     </main>
   );

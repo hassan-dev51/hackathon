@@ -8,7 +8,9 @@ import { Sora } from "next/font/google";
 const sora = Sora({ subsets: ["latin"] });
 const Hero = () => {
   return (
-    <section className={`flex justify-between items-center ${sora.className}`}>
+    <section
+      className={`flex justify-between items-center ${sora.className} padding`}
+    >
       <div className="flex flex-col gap-11 justify-between mt-8 pt-8">
         <span className="bg-blue-100 w-[150px] rounded-[10px] px-6 py-3 text-blue-700 font-bold">
           Sale 70%

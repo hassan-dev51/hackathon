@@ -7,7 +7,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer>
-      <div className="flex py-52">
+      <div className="flex py-52 px-32">
         <div className="w-1/3 space-y-7 ">
           <Image
             src={"/images/Logo.jpg"}
@@ -82,7 +82,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-2 border-black flex justify-between items-center py-8 ">
+      <div className="border-t-2 px-32 border-black flex justify-between items-center py-8 ">
         <p className="text-gray-500">
           Copyright © 2022 Dine <br /> Market
         </p>

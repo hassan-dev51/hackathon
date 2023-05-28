@@ -5,7 +5,7 @@ import { Sora } from "next/font/google";
 const sora = Sora({ subsets: ["latin"] });
 const Promotion = () => {
   return (
-    <section className={`${sora.className}`}>
+    <section className={`${sora.className} padding`}>
       <div className="text-center my-20 ">
         <span className="uppercase text-center tracking-[4px] text-[12px] text-blue-700 font-bold">
           {" "}

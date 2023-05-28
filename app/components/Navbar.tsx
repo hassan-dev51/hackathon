@@ -9,7 +9,7 @@ const sora = Sora({ subsets: ["latin"] });
 const Navbar = () => {
   return (
     <nav
-      className={`py-7 flex justify-between   items-center ${sora.className}`}
+      className={`py-7 flex justify-between   items-center ${sora.className} px-32`}
     >
       <div className="flex w-1/2 justify-between">
         <Link href={"/"}>
