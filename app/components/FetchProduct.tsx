@@ -1,11 +1,10 @@
 "use client";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import imageUrlBuilder from "@sanity/image-url";
-import Link from "next/link";
 
-const Product = () => {
+const FetchProduct = () => {
   const [product, setProduct] = useState<any>([]);
 
   useEffect(() => {
@@ -22,23 +21,21 @@ const Product = () => {
     return null;
   };
   return (
-    <div className="flex flex-wrap gap-7 px-32 mt-12">
+    <div className="flex flex-wrap gap-7 ">
       {product.map((product: any) => {
         return (
           <div className="product-card" key={product._id}>
-            <Link href={`/product/${product.slug.current}`}>
-              <Image
-                //@ts-ignore
-                src={getImageUrl(product)}
-                alt="error"
-                width={250}
-                height={200}
-                className="product-image"
-              />
-              <p className="product-name">{product.name}</p>
-              <p className="product-name">{product.item}</p>
-              <p className="product-price">${product.price}</p>
-            </Link>
+            <Image
+              //@ts-ignore
+              src={getImageUrl(product)}
+              alt="error"
+              width={250}
+              height={200}
+              className="product-image"
+            />
+            <p className="product-name">{product.name}</p>
+            <p className="product-name">{product.item}</p>
+            <p className="product-price">${product.price}</p>
           </div>
         );
       })}
@@ -46,4 +43,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default FetchProduct;

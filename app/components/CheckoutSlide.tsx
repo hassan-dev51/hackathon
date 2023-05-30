@@ -2,31 +2,19 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
-import checkList from "./checkList";
-
+import { checkList } from "./checkList";
+import styles from "./CheckoutSlide.module.css";
 import { Sora } from "next/font/google";
 
 const sora = Sora({ subsets: ["latin"] });
 const CheckoutSlide = () => {
-  const handleMouseEnter = (event: any) => {
-    event.target.parentNode.classList.add("slide-card-hovered");
-  };
-
-  const handleMouseLeave = (event: any) => {
-    event.target.parentNode.classList.remove("slide-card-hovered");
-  };
-
   return (
     <div className={sora.className}>
       <Swiper watchSlidesProgress={true} slidesPerView={3} className="mySwiper">
         {checkList.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="slide-card">
-              <div
-                className="slide-card-content"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
+            <div className={styles.slideCard}>
+              <div className="slide-card-content">
                 <Image
                   src={item.image}
                   alt={item.name}

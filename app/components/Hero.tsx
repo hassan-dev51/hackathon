@@ -58,7 +58,7 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="bg-red-300 rounded-full">
+      <div className="bg-[#FFF8DE] rounded-full">
         <Image src="/images/header.png" alt="hero" width={1240} height={900} />
       </div>
     </section>

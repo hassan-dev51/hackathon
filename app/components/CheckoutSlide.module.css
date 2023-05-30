@@ -1,0 +1,22 @@
+.sliderContainer {
+  position: relative;
+  width: 100%;
+}
+
+.mySwiper {
+  overflow: visible !important;
+}
+
+.slideCard {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slideCardContent {
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+}
+
+.slideCardHovered .slideCardContent {
+  transform: scale(1.5);
+}

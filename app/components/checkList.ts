@@ -55,4 +55,26 @@ const checkList = [
   },
 ];
 
-export default checkList;
+const uniqueTitle = [
+  {
+    id: 1,
+    title: "Using Good Quality Materials",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  },
+  {
+    id: 2,
+    title: "100% Handmade Products",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  },
+  {
+    id: 3,
+    title: "Modern Fashion Design",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  },
+  {
+    id: 4,
+    title: "Discount for Bulk Orders",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  },
+];
+export { checkList, uniqueTitle };
