@@ -1,27 +1,12 @@
-"use client";
-import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import imageUrlBuilder from "@sanity/image-url";
+
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { SlBasket } from "react-icons/sl";
-import Link from "next/link";
-const ProductDetails = ({ params }: { params: { slug: string } }) => {
-  const [product, setProduct] = useState<any>([]);
 
-  useEffect(() => {
-    const query = '*[_type=="product"]';
-    client.fetch(query).then((data) => setProduct(data));
-  }, []);
-  // Function to get the URL of the first image
-  const getImageUrl = (product: any) => {
-    if (product.image && product.image.length > 0) {
-      const image = product.image[0]; // Get the first image
-      const builder = imageUrlBuilder(client);
-      return builder.image(image).url();
-    }
-    return null;
-  };
+import { fetchProducts, getImageUrl } from "@/app/products/page";
+
+const ProductDetails = async ({ params }: { params: { slug: string } }) => {
+  const product = await fetchProducts();
   return (
     <div className="flex justify-start gap-7 px-32 mt-12">
       {product

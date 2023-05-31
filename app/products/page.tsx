@@ -1,26 +1,31 @@
-"use client";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 import Link from "next/link";
 
-const Product = () => {
-  const [product, setProduct] = useState<any>([]);
+export const fetchProducts = async () => {
+  const res = await client.fetch(`*[_type=="product"]{
+    name,
+    _id,
+    slug,
+    price,
+    category,
+    item,
+    image
+  }`);
+  return res;
+};
+export const getImageUrl = (product: any) => {
+  if (product.image && product.image.length > 0) {
+    const image = product.image[0];
+    const builder = imageUrlBuilder(client);
+    return builder.image(image).url();
+  }
+  return null;
+};
+const Product = async () => {
+  const product = await fetchProducts();
 
-  useEffect(() => {
-    const query = '*[_type=="product"]';
-    client.fetch(query).then((data) => setProduct(data));
-  }, []);
-  // Function to get the URL of the first image
-  const getImageUrl = (product: any) => {
-    if (product.image && product.image.length > 0) {
-      const image = product.image[0]; // Get the first image
-      const builder = imageUrlBuilder(client);
-      return builder.image(image).url();
-    }
-    return null;
-  };
   return (
     <div className="flex flex-wrap gap-7 px-32 mt-12">
       {product.map((product: any) => {

@@ -16,7 +16,7 @@ const Promotion = () => {
         </h1>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex justify-center gap-4">
         <div className="space-y-6">
           <div className="bg-[#D7D7D9] flex justify-center items-center">
             <div className="py-8 pl-8">
