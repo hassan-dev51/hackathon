@@ -2,7 +2,7 @@ import CheckoutSlide from "./CheckoutSlide";
 
 const Checkout = () => {
   return (
-    <section className="padding">
+    <section className="md:px-32 px-7">
       <div className="text-center my-20 ">
         <span className="uppercase text-center tracking-[4px] text-[12px] text-blue-700 font-bold">
           PRODUCTS

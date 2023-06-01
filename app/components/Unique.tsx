@@ -8,20 +8,20 @@ const Unique = () => {
   return (
     <section className={sora.className}>
       <div className="flex">
-        <div className="w-1/2"></div>
-        <h1 className="w-1/2 text-4xl  tracking-[5px] font-bold px-6 pt-6 translate-y-10">
+        <div className="xl:w-1/2 w-0"></div>
+        <h1 className="xl:w-1/2 w-full text-4xl z-10 tracking-[5px] font-bold px-6 pt-6 translate-y-10 md:px-32">
           Unique and <br /> Authentic Vintage <br /> Designer Jewellery
         </h1>
       </div>
-      <div className="flex bg-gray-100 py-16 px-32">
-        <div className="w-1/2 relative">
-          <p className="capitalize tracking-[8px] opacity-10 text-8xl font-extrabold">
+      <div className="flex flex-col relative xl:flex-row bg-gray-100 py-16 md:px-32 px-7  ">
+        <div className="md:w-1/2  w-full max-h-max ">
+          <p className="capitalize absolute md:w-1/2  md:tracking-[8px] tracking-[6px] opacity-10  md:text-8xl text-5xl  font-extrabold">
             different form others
           </p>
 
-          <div className="absolute top-4 flex flex-wrap">
+          <div className="flex flex-wrap max-h-max">
             {uniqueTitle.map((item) => (
-              <div className="w-[250px] p-2" key={item.id}>
+              <div className="w-[250px]   p-2" key={item.id}>
                 <h2 className="text-[18px] font-bold tracking-[1px] mb-5">
                   {item.title}
                 </h2>
@@ -30,15 +30,16 @@ const Unique = () => {
             ))}
           </div>
         </div>
-        <div className="w-1/2 flex space-x-5">
+
+        <div className="md:w-1/2 w-ful items-center flex md:flex-row  flex-col space-x-5">
           <Image
             src={"/images/p7.png"}
             alt="product7"
             width={350}
             height={100}
           />
-          <div className="">
-            <p className="text-sm tracking-[3px] w-[250px] text-justify mb-5">
+          <div className="md:mt-[0px] mt-6">
+            <p className="text-sm tracking-[3px] md:w-[250px] w-full  text-justify mb-5">
               This piece is ethically crafted in our small family-owned workshop
               in Peru with unmatched attention to detail and care. The Natural
               color is the actual natural color of the fiber, undyed and 100%

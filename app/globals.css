@@ -117,3 +117,14 @@
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
+.mob-navbar {
+  display: none;
+}
+@media screen and (max-width: 875px) {
+  .res-navbar {
+    display: none;
+  }
+  .mob-navbar {
+    display: block;
+  }
+}

@@ -5,7 +5,7 @@ import { Sora } from "next/font/google";
 const sora = Sora({ subsets: ["latin"] });
 const Promotion = () => {
   return (
-    <section className={`${sora.className} padding`}>
+    <section className={`${sora.className} md:px-32 px-7`}>
       <div className="text-center my-20 ">
         <span className="uppercase text-center tracking-[4px] text-[12px] text-blue-700 font-bold">
           {" "}
@@ -16,10 +16,10 @@ const Promotion = () => {
         </h1>
       </div>
 
-      <div className="flex justify-center gap-4">
+      <div className="flex xl:flex-row flex-col justify-center gap-4">
         <div className="space-y-6">
-          <div className="bg-[#D7D7D9] flex justify-center items-center">
-            <div className="py-8 pl-8">
+          <div className="bg-[#D7D7D9] flex justify-center items-center md:flex-row flex-col">
+            <div className="p-8">
               <h2 className="text-[28px] tracking-[2px] font-bold capitalize">
                 get up to 60%
               </h2>
@@ -37,11 +37,11 @@ const Promotion = () => {
             <h2 className="text-[28px] tracking-[2px] font-bold uppercase">
               get 30% off
             </h2>
-            <div className="py-8 pl-8 ">
+            <div className="p-8">
               <p className="uppercase text-[12px]">use promo code</p>
               <button
                 type="button"
-                className="uppercase tracking-[5px] border-white border rounded-xl px-8 py-2 bg-[#3B3C36]"
+                className="uppercase tracking-[5px] border-white border rounded-xl md:px-8 px-2 py-2 bg-[#3B3C36]"
               >
                 dine weekend sale
               </button>
@@ -49,7 +49,7 @@ const Promotion = () => {
           </div>
         </div>
 
-        <div className="flex gap-4 ">
+        <div className="flex gap-4 xl:flex-row flex-col">
           <div className="bg-[#EFE1C7]">
             <div className="p-4">
               <h1>Flex Sweatshirt</h1>

@@ -4,13 +4,13 @@ const sora = Sora({ subsets: ["latin"] });
 const Newsletter = () => {
   return (
     <section
-      className={`${sora.className} h-[70vh] flex flex-col justify-end items-center`}
+      className={`${sora.className}  flex flex-col justify-end items-center`}
     >
-      <div className="relative">
-        <h2 className="text-8xl tracking-[3px] opacity-10 font-bold text-center">
+      <div className="flex justify-center items-center pt-28">
+        <h2 className="md:text-8xl absolute text-4xl tracking-[3px] opacity-10 font-bold text-center">
           Newsletter
         </h2>
-        <div className="absolute space-y-7 text-center -top-[10px] right-[100px]">
+        <div className="space-y-7 text-center">
           <h2 className="text-2xl font-bold tracking-[3px]">
             Subscribe Our Newsletter
           </h2>

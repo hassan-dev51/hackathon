@@ -7,8 +7,8 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer>
-      <div className="flex py-52 px-32">
-        <div className="w-1/3 space-y-7 ">
+      <div className="flex md:flex-row flex-col md:py-52 py-24 md:px-32 px-7">
+        <div className="md:w-1/3 w-full space-y-7 ">
           <Image
             src={"/images/Logo.jpg"}
             alt="footer-logo"
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-evenly w-full">
+        <div className="flex md:flex-row flex-col justify-evenly w-full">
           <div>
             <h2 className="text-xl text-gray-[#666666] font-bold">Company</h2>
             <ul className="space-y-4 mt-4 text-gray-400">
@@ -82,7 +82,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-2 px-32 border-black flex justify-between items-center py-8 ">
+      <div className="border-t-2 md:px-32 px-7 border-black flex md:flex-row flex-col justify-between  md:items-center items-start md:gap-0 gap-4 py-8 ">
         <p className="text-gray-500">
           Copyright © 2022 Dine <br /> Market
         </p>

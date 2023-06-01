@@ -1,14 +1,20 @@
+"use client";
 import Image from "next/image";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { SlBasket } from "react-icons/sl";
-
+import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, getImageUrl } from "@/app/products/page";
+import { RootState } from "@/app/redux/store";
+import { decrementQuantity, incrementQuantity } from "@/app/redux/addToCart";
 
 const ProductDetails = async ({ params }: { params: { slug: string } }) => {
+  const { quantity } = useSelector((state: RootState) => state.addedItems);
+  const dispatch = useDispatch();
+
   const product = await fetchProducts();
   return (
-    <div className="flex justify-start gap-7 px-32 mt-12">
+    <div className="flex flex-col md:flex-row justify-start gap-7 md:px-32 px-4 mt-12">
       {product
         .filter((product: any) => product.slug.current === params.slug)
         .map((product: any) => (
@@ -38,20 +44,21 @@ const ProductDetails = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
         <div className="quantity">
-          <h3>Quantity:</h3>
+          <h3>Quantity: </h3>
           <p className="quantity-desc flex items-center">
             <span className="minus">
-              <AiOutlineMinus />
+              <AiOutlineMinus onClick={() => dispatch(decrementQuantity())} />
             </span>
-            <span className="num">23</span>
+
+            <span className="num"> {quantity} </span>
             <span className="plus">
-              <AiOutlinePlus />
+              <AiOutlinePlus onClick={() => dispatch(incrementQuantity())} />
             </span>
           </p>
         </div>
         <div className="mt-8">
           <button className="bg-black text-white w-[140px] gap-5 flex p-4 justify-end items-center">
-            <SlBasket className="text-3xl " />
+            <SlBasket className="text-3xl" />
 
             <h3 className="text-center leading-4">
               Add <br /> to Cart

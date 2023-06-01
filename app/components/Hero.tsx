@@ -9,7 +9,7 @@ const sora = Sora({ subsets: ["latin"] });
 const Hero = () => {
   return (
     <section
-      className={`flex justify-between items-center ${sora.className} padding`}
+      className={`flex xl:flex-row flex-col justify-between items-center ${sora.className} md:px-32 px-7`}
     >
       <div className="flex flex-col gap-11 justify-between mt-8 pt-8">
         <span className="bg-blue-100 w-[150px] rounded-[10px] px-6 py-3 text-blue-700 font-bold">
@@ -31,31 +31,35 @@ const Hero = () => {
 
           <h3 className="text-center leading-4">Start Shopping</h3>
         </Link>
-        <div className="flex justify-between">
-          <Image
-            src={"/images/Featured1.jpg"}
-            alt="feature1"
-            width={100}
-            height={40}
-          />
-          <Image
-            src={"/images/Featured2.jpg"}
-            alt="feature2"
-            width={100}
-            height={40}
-          />
-          <Image
-            src={"/images/Featured3.jpg"}
-            alt="feature3"
-            width={100}
-            height={40}
-          />
-          <Image
-            src={"/images/Featured4.jpg"}
-            alt="feature4"
-            width={100}
-            height={40}
-          />
+        <div className="flex justify-between gap-6">
+          <div className="flex md:flex-row space-x-6 items-end flex-col justify-between">
+            <Image
+              src={"/images/Featured1.jpg"}
+              alt="feature1"
+              width={100}
+              height={40}
+            />
+            <Image
+              src={"/images/Featured2.jpg"}
+              alt="feature2"
+              width={100}
+              height={40}
+            />
+          </div>
+          <div className="flex md:flex-row flex-col items-end space-x-6 justify-between">
+            <Image
+              src={"/images/Featured3.jpg"}
+              alt="feature3"
+              width={100}
+              height={40}
+            />
+            <Image
+              src={"/images/Featured4.jpg"}
+              alt="feature4"
+              width={100}
+              height={40}
+            />
+          </div>
         </div>
       </div>
       <div className="bg-[#FFF8DE] rounded-full">
