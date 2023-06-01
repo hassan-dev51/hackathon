@@ -1,8 +1,9 @@
+import { Providers } from "@/redux/provider";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Sora } from "next/font/google";
-import { Providers } from "./redux/provider";
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={sora.className}>
         <Providers>
+          <Toaster />
           <Navbar />
           {children}
           <Footer />

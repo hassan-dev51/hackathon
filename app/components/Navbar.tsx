@@ -1,12 +1,16 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
 import { SlBasket } from "react-icons/sl";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Sora } from "next/font/google";
+import { useAppSelector } from "@/redux/hooks";
 
 const sora = Sora({ subsets: ["latin"] });
 const Navbar = () => {
+  const { totalquantity } = useAppSelector((state) => state.addedItems);
+
   return (
     <nav
       className={`py-7  flex justify-between items-center ${sora.className} md:px-32 px-5`}
@@ -34,7 +38,7 @@ const Navbar = () => {
 
       <div className="rounded-[25px] p-3 bg-gray-300 res-navbar">
         <Link href={"/cart"} className="cart-icon">
-          <span className="cart-item-qty">3</span>
+          <span className="cart-item-qty">{totalquantity}</span>
           <SlBasket />
         </Link>
       </div>
