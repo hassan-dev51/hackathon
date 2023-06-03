@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 
 interface ProductType {
+  _id: any;
   name: string;
   category: string;
   price: number;
@@ -42,12 +43,12 @@ const addToCartSlice = createSlice({
     },
     onAdd: (state, action: PayloadAction<cartItems>) => {
       const { product, quantity } = action.payload;
-      const existingProduct = state.cart.find(
-        (item) => item.product === product
+      const existingProductIndex = state.cart.findIndex(
+        (item) => item.product._id === product._id
       );
 
-      if (existingProduct) {
-        existingProduct.quantity += quantity;
+      if (existingProductIndex !== -1) {
+        state.cart[existingProductIndex].quantity += quantity;
       } else {
         state.cart.push({ product, quantity });
       }
@@ -56,12 +57,66 @@ const addToCartSlice = createSlice({
         (total, item) => total + item.quantity,
         0
       );
+      state.totalPrice = state.cart.reduce(
+        (acc, item) => acc + item.product.price * item.quantity,
+        0
+      );
 
       toast.success(`${quantity} ${product.name} added to the cart`);
       state.quantity = 1;
     },
+
+    onRemove: (state, action: PayloadAction<cartItems>) => {
+      const { product } = action.payload;
+
+      let foundProduct = state.cart.find(
+        (item) => item.product._id === product._id
+      );
+
+      const newProductItem = state.cart.filter(
+        (item) => item.product._id !== product._id
+      );
+
+      if (foundProduct) {
+        state.totalquantity = state.totalquantity - foundProduct?.quantity;
+        state.totalPrice =
+          state.totalPrice -
+          foundProduct?.product.price * foundProduct?.quantity;
+      }
+      state.cart = newProductItem;
+      toast.success(`${product.name} has been removed`);
+    },
+    increaseCartQuantity: (state, action: PayloadAction<cartItems>) => {
+      const { product } = action.payload;
+      let foundProduct = state.cart.find(
+        (item) => item.product._id === product._id
+      );
+      if (foundProduct) {
+        foundProduct.quantity += 1;
+        state.totalquantity += 1;
+        state.totalPrice += foundProduct.product.price * 1;
+      }
+    },
+    decreaseCartQuantity: (state, action: PayloadAction<cartItems>) => {
+      const { product } = action.payload;
+
+      let foundProduct = state.cart.find(
+        (item) => item.product._id === product._id
+      );
+      if (foundProduct && foundProduct.quantity > 1) {
+        foundProduct.quantity -= 1;
+        state.totalquantity -= 1;
+        state.totalPrice -= foundProduct.product.price;
+      }
+    },
   },
 });
-export const { incrementQuantity, decrementQuantity, onAdd } =
-  addToCartSlice.actions;
+export const {
+  incrementQuantity,
+  decrementQuantity,
+  onAdd,
+  onRemove,
+  increaseCartQuantity,
+  decreaseCartQuantity,
+} = addToCartSlice.actions;
 export default addToCartSlice.reducer;

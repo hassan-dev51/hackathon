@@ -1,5 +1,5 @@
 "use client";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import {
   AiOutlineMinus,
@@ -8,9 +8,16 @@ import {
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import { getImageUrl } from "../products/page";
+import {
+  decreaseCartQuantity,
+  increaseCartQuantity,
+  onRemove,
+} from "@/redux/addToCart";
 const Cart = () => {
-  const { cart, totalquantity } = useAppSelector((state) => state.addedItems);
-
+  const { cart, totalquantity, totalPrice } = useAppSelector(
+    (state) => state.addedItems
+  );
+  const dispatch = useAppDispatch();
   return (
     <section className="px-32">
       {cart.length ? (
@@ -38,17 +45,28 @@ const Cart = () => {
               </div>
               <div className="flex gap-8 md:flex-col flex-row items-center md:items-end">
                 <div className="">
-                  <TiDeleteOutline className="text-xl" />
+                  <TiDeleteOutline
+                    className="text-xl cursor-pointer"
+                    onClick={() => dispatch(onRemove(currElem))}
+                  />
                 </div>
                 <div className="flex bottom">
                   <div>
                     <p className="quantity-desc flex  items-center">
                       <span className="minus">
-                        <AiOutlineMinus />
+                        <AiOutlineMinus
+                          onClick={() =>
+                            dispatch(decreaseCartQuantity(currElem))
+                          }
+                        />
                       </span>
                       <span className="num">{currElem.quantity}</span>
                       <span className="plus">
-                        <AiOutlinePlus />
+                        <AiOutlinePlus
+                          onClick={() =>
+                            dispatch(increaseCartQuantity(currElem))
+                          }
+                        />
                       </span>
                     </p>
                   </div>
@@ -71,7 +89,7 @@ const Cart = () => {
           </div>
         </div>
       )}
-      <div className="text-end">total bill $567</div>
+      <div className="text-end">total bill ${totalPrice}</div>
       <div className="p-8 flex justify-center items-center">
         <button className="border p-2">Process Order</button>
       </div>
