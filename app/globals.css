@@ -118,16 +118,12 @@
   display: none;
 }
 
-.success-wrapper,
-.cancel-wrapper {
+.success-wrapper {
   background-color: white;
   min-height: 60vh;
 }
-.success,
-.cancel {
-  width: 1000px;
-  margin: auto;
-  margin-top: 160px;
+.success {
+  margin: 40px;
   background-color: #dcdcdc;
   padding: 50px;
   border-radius: 15px;
@@ -180,5 +176,14 @@
   }
   .mob-navbar {
     display: block;
+  }
+  .success .icon {
+    font-size: 20px;
+  }
+  .success h2 {
+    font-size: 20px;
+  }
+  .btn {
+    font-size: 15px;
   }
 }
