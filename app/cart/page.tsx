@@ -15,6 +15,7 @@ import {
 } from "@/redux/addToCart";
 import getStripe from "../lib/getStripe";
 import { toast } from "react-hot-toast";
+
 const Cart = () => {
   const { cart, totalquantity, totalPrice } = useAppSelector(
     (state) => state.addedItems
@@ -28,6 +29,7 @@ const Cart = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "https://hackathon-iota.vercel.app/",
       },
       body: JSON.stringify(cart),
     });
@@ -98,6 +100,11 @@ const Cart = () => {
               </div>
             </div>
           ))}
+          <div className="p-8 flex justify-center items-center">
+            <button className="border p-2" onClick={handleCheckout}>
+              Process Order
+            </button>
+          </div>
         </div>
       ) : (
         <div>
@@ -114,11 +121,6 @@ const Cart = () => {
         </div>
       )}
       <div className="text-end">total bill ${totalPrice}</div>
-      <div className="p-8 flex justify-center items-center">
-        <button className="border p-2" onClick={handleCheckout}>
-          Process Order
-        </button>
-      </div>
     </section>
   );
 };
