@@ -44,13 +44,13 @@ const Cart = () => {
     }
   };
   return (
-    <section className="px-32">
+    <section className="md:px-32 px-7">
       {cart.length ? (
         <div className="h-[400px] overflow-y-scroll">
           {cart.map((currElem, ind) => (
             <div
               key={ind}
-              className="flex md:flex-row border flex-col justify-between items-center mb-7"
+              className="flex md:flex-row border flex-col justify-between md:items-center m-4 items-start md:p-0 p-4"
             >
               <div className="flex md:flex-row flex-col gap-5">
                 <Image
@@ -119,7 +119,9 @@ const Cart = () => {
           </div>
         </div>
       )}
-      <div className="text-end">total bill ${totalPrice}</div>
+      <div className="bg-black text-yellow-100 text-center mt-7 p-4 rounded-[15px] uppercase">
+        total bill $ {totalPrice}
+      </div>
     </section>
   );
 };

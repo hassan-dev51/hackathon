@@ -36,9 +36,6 @@
   transition: transform 0.5s ease;
   color: #324d67;
 }
-.product-card:hover {
-  transform: scale(1.1, 1.1);
-}
 .product-name {
   font-weight: 500;
   margin-bottom: 10px;
@@ -176,6 +173,7 @@
 .btn:hover {
   transform: scale(1.1, 1.1);
 }
+
 @media screen and (max-width: 875px) {
   .res-navbar {
     display: none;

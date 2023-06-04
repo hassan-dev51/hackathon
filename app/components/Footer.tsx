@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex md:flex-row flex-col justify-evenly w-full">
+        <div className="flex md:flex-row flex-col justify-evenly w-full gap-5 md:mt-0 mt-3">
           <div>
             <h2 className="text-xl text-gray-[#666666] font-bold">Company</h2>
             <ul className="space-y-4 mt-4 text-gray-400">
@@ -55,8 +55,8 @@ const Footer = () => {
           </div>
           <div>
             {" "}
-            <h2 className="text-xl text-gray-400 font-bold">Support</h2>
-            <ul className="space-y-4 mt-4">
+            <h2 className="text-xl text-gray-[#666666] font-bold">Support</h2>
+            <ul className="space-y-4 mt-4 text-gray-400">
               <li>
                 <Link href={""}>Support Career</Link>
               </li>
@@ -70,8 +70,8 @@ const Footer = () => {
           </div>
           <div>
             {" "}
-            <h2 className="text-xl text-gray-400 font-bold">Contact</h2>
-            <ul className="space-y-4 mt-4">
+            <h2 className="text-xl text-gray-[#666666] font-bold">Contact</h2>
+            <ul className="space-y-4 mt-4 text-gray-400">
               <li>
                 <Link href={""}>WhatsApp</Link>
               </li>
