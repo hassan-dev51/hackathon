@@ -29,7 +29,7 @@ const Cart = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://hackathon-iota.vercel.app/",
+        "Access-Control-Allow-Origin": "no-cors",
       },
       body: JSON.stringify(cart),
     });
