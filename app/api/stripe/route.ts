@@ -34,10 +34,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
           quantity: item.quantity,
         };
       }),
-      success_url: `https://hackathon-iota.vercel.app/success`,
-      cancel_url: `https://hackathon-iota.vercel.app/canceled`,
+      success_url: `${req.headers.get}/success`,
+      cancel_url: `${req.headers.get}/canceled`,
     });
-    console.log("nothing is printing", session.url);
 
     return NextResponse.json(session, { status: 200 });
   } catch (error) {
