@@ -34,8 +34,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           quantity: item.quantity,
         };
       }),
-      success_url: `http://localhost:3000/success`,
-      cancel_url: `http://localhost:3000/`,
+      success_url: `https://hackathon-iota.vercel.app/success`,
+      cancel_url: `https://hackathon-iota.vercel.app/`,
     });
     console.log("nothing is printing", session.url);
 

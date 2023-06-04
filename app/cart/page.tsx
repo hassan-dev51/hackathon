@@ -23,7 +23,6 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
-    console.log(stripe);
 
     const response = await fetch("http://localhost:3000/api/stripe", {
       method: "POST",
@@ -33,9 +32,7 @@ const Cart = () => {
       body: JSON.stringify(cart),
     });
 
-    // if (response.status === 500) return;
     const data = await response.json();
-    console.log("data id", data.id);
 
     const result = await stripe?.redirectToCheckout({ sessionId: data.id });
 
