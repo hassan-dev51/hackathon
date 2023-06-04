@@ -13,11 +13,38 @@ import {
   increaseCartQuantity,
   onRemove,
 } from "@/redux/addToCart";
+import getStripe from "../lib/getStripe";
+import { toast } from "react-hot-toast";
 const Cart = () => {
   const { cart, totalquantity, totalPrice } = useAppSelector(
     (state) => state.addedItems
   );
   const dispatch = useAppDispatch();
+
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+    console.log(stripe);
+
+    const response = await fetch("http://localhost:3000/api/stripe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cart),
+    });
+
+    // if (response.status === 500) return;
+    const data = await response.json();
+    console.log("data id", data.id);
+
+    const result = await stripe?.redirectToCheckout({ sessionId: data.id });
+
+    if (result?.error) {
+      toast.error("error");
+    } else {
+      toast.loading("redirecting");
+    }
+  };
   return (
     <section className="px-32">
       {cart.length ? (
@@ -91,7 +118,9 @@ const Cart = () => {
       )}
       <div className="text-end">total bill ${totalPrice}</div>
       <div className="p-8 flex justify-center items-center">
-        <button className="border p-2">Process Order</button>
+        <button className="border p-2" onClick={handleCheckout}>
+          Process Order
+        </button>
       </div>
     </section>
   );
