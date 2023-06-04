@@ -25,11 +25,10 @@ const Cart = () => {
   const handleCheckout = async () => {
     const stripe = await getStripe();
 
-    const response = await fetch("http://localhost:3000/api/stripe", {
+    const response = await fetch("/api/stripe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "no-cors",
       },
       body: JSON.stringify(cart),
     });
