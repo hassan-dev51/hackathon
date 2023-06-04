@@ -35,7 +35,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         };
       }),
       success_url: `https://hackathon-iota.vercel.app/success`,
-      cancel_url: `https://hackathon-iota.vercel.app/`,
+      cancel_url: `https://hackathon-iota.vercel.app/canceled`,
     });
     console.log("nothing is printing", session.url);
 
