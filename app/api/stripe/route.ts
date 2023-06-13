@@ -7,6 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY! || "", {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
+  const path = req.nextUrl.origin;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -34,8 +35,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           quantity: item.quantity,
         };
       }),
-      success_url: `https://hackathon-iota.vercel.app/success`,
-      cancel_url: `https://hackathon-iota.vercel.app/canceled`,
+      success_url: `${path}/success`,
+      cancel_url: `${path}/canceled`,
     });
 
     return NextResponse.json(session, { status: 200 });

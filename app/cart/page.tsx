@@ -46,7 +46,7 @@ const Cart = () => {
   return (
     <section className="md:px-32 px-7">
       {cart.length ? (
-        <div className="h-[400px] overflow-y-scroll">
+        <div className="h-[400px] overflow-auto">
           {cart.map((currElem, ind) => (
             <div
               key={ind}
