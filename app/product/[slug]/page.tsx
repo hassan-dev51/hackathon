@@ -1,13 +1,16 @@
 "use client";
+
 import Image from "next/image";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { SlBasket } from "react-icons/sl";
 import { useEffect, useState } from "react";
-import { getImageUrl } from "@/app/products/page";
-import { decrementQuantity, incrementQuantity, onAdd } from "@/redux/addToCart";
 import { client } from "@/sanity/lib/client";
+import { SlBasket } from "react-icons/sl";
+
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { getImageUrl } from "@/app/products/page";
+
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { decrementQuantity, incrementQuantity, onAdd } from "@/redux/addToCart";
 
 const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const { quantity } = useAppSelector((state) => state.addedItems);
