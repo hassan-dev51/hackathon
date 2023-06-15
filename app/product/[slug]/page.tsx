@@ -16,7 +16,15 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const { quantity } = useAppSelector((state) => state.addedItems);
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<any>([]);
+  console.log(product.map((item: any) => item.image[0].asset._ref));
 
+  const AddIntoDatabase = async (product: any, quantity: any) => {
+    const res = await fetch("/api/cartTable", {
+      method: "POST",
+      body: JSON.stringify({ product: product, quantity: quantity }),
+    });
+    return res.json;
+  };
   useEffect(() => {
     const query = '*[_type=="product"]';
     client.fetch(query).then((data) => setProduct(data));
@@ -71,11 +79,12 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
               <div className="mt-8">
                 <button
                   className="bg-black text-white w-[140px] gap-5 flex p-4 justify-end items-center"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       onAdd({ product: currProduct, quantity: quantity })
-                    )
-                  }
+                    );
+                    AddIntoDatabase(currProduct, quantity);
+                  }}
                 >
                   <SlBasket className="text-3xl" />
 
