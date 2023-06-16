@@ -1,10 +1,11 @@
-import { cartTable, db } from "@/lib/drizzle";
+import { cart, db } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 } from "uuid";
 import { cookies } from "next/headers";
 export async function GET(req: NextRequest) {
   try {
-    const res = await db.select().from(cartTable);
+    const res = await db.select().from(cart);
+
     return NextResponse.json({ data: res });
   } catch (error) {
     console.log((error as { message: string }).message);
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const res = await db
-      .insert(cartTable)
+      .insert(cart)
       .values({
         user_id: setCookies.get("user_id")?.value as string,
         name: product.name,

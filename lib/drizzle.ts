@@ -4,7 +4,7 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 
 import { sql } from "@vercel/postgres";
 
-export const cartTable = pgTable("cart", {
+export const cart = pgTable("cart", {
   id: serial("id").primaryKey(),
   user_id: varchar("user_id", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),

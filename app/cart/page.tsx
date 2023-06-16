@@ -15,8 +15,15 @@ import {
 } from "@/redux/addToCart";
 import getStripe from "../lib/getStripe";
 import { toast } from "react-hot-toast";
+import { urlForImage } from "@/sanity/lib/image";
 
-const Cart = () => {
+const getData = async () => {
+  const res = await fetch("http://localhost:3000/api/cartTable");
+  const result = await res.json();
+  return result;
+};
+
+const Cart = async () => {
   const { cart, totalquantity, totalPrice } = useAppSelector(
     (state) => state.addedItems
   );
@@ -43,29 +50,30 @@ const Cart = () => {
       toast.loading("redirecting");
     }
   };
+  const { data } = await getData();
+
   return (
     <section className="md:px-32 px-7">
-      {cart.length ? (
+      {data.length ? (
         <div className="h-[400px] overflow-auto">
-          {cart.map((currElem, ind) => (
+          {data.map((currElem: any, ind: number) => (
             <div
               key={ind}
               className="flex md:flex-row border flex-col justify-between md:items-center m-4 items-start md:p-0 p-4"
             >
               <div className="flex md:flex-row flex-col gap-5">
                 <Image
-                  // @ts-ignore
-                  src={getImageUrl(currElem.product)}
+                  src={urlForImage(currElem.image).url()}
                   alt="error"
                   width={150}
                   height={150}
                   className="cart-product-image"
                 />
                 <div className="mt-8 flex flex-col gap-4">
-                  <h5>Name | {currElem.product.name}</h5>
-                  <h5>Category | {currElem.product.category}</h5>
-                  <h5>item | {currElem.product.item}</h5>
-                  <h5>Price | {currElem.product.price}</h5>
+                  <h5>Name | {currElem.name}</h5>
+                  <h5>Category | {currElem.category}</h5>
+                  <h5>item | {currElem.item}</h5>
+                  <h5>Price | {currElem.price}</h5>
                 </div>
               </div>
               <div className="flex gap-8 md:flex-col flex-row items-center md:items-end">
