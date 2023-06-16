@@ -44,7 +44,7 @@ const Cart = async () => {
     setCartData([]);
   };
   const getData = async () => {
-    const res = await fetch("http://localhost:3000/api/cartTable");
+    const res = await fetch("/api/cartTable");
     const { data } = await res.json();
     setCartData(data);
     return data;
