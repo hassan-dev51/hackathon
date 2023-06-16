@@ -2,17 +2,17 @@ import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
 import React from "react";
 
-const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/cartTable");
-  const result = await res.json();
-  return result;
-};
-const Kids = async () => {
-  const { data } = await getData();
+// const getData = async () => {
+//   const res = await fetch("http://localhost:3000/api/cartTable");
+//   const result = await res.json();
+//   return result;
+// };
+const Kids = () => {
+  // const { data } = await getData();
   return (
     <div>
       <div>
-        {data.map((currProduct: any) => (
+        {/* {data.map((currProduct: any) => (
           <div className="product-card" key={currProduct.id}>
             <Image
               src={urlForImage(currProduct.image).url()}
@@ -31,7 +31,8 @@ const Kids = async () => {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
+        Kids
       </div>
     </div>
   );

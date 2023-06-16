@@ -16,7 +16,6 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const { quantity } = useAppSelector((state) => state.addedItems);
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<any>([]);
-  console.log(product.map((item: any) => item.image[0].asset._ref));
 
   const AddIntoDatabase = async (product: any, quantity: any) => {
     const res = await fetch("/api/cartTable", {

@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   const user_id = cookies().get("user_id");
 
   if (!user_id) {
-    setCookies.set("user_id", uuid);
+    cookies().set("user_id", uuid);
   }
 
   try {
