@@ -58,7 +58,7 @@ const Cart = async () => {
     const hasConfirm = confirm(`Are you sure you want to delete`);
     if (hasConfirm) {
       try {
-        await fetch(`http://localhost:3000/api/cartTable?id=${id}`, {
+        await fetch(`/api/cartTable?id=${id}`, {
           method: "DELETE",
         });
         router.refresh();
@@ -70,9 +70,7 @@ const Cart = async () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/cartTable?user_id=${cookie}`
-        );
+        const res = await fetch(`/api/cartTable?user_id=${cookie}`);
         const { data } = await res.json();
         dispatch(CartData(data));
       } catch (error) {
