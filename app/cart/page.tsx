@@ -1,27 +1,36 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+import Cookie from "js-cookie";
+import { toast } from "react-hot-toast";
+
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
+import { TiDeleteOutline } from "react-icons/ti";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
   AiOutlineShopping,
 } from "react-icons/ai";
-import { TiDeleteOutline } from "react-icons/ti";
+
+import getStripe from "../lib/getStripe";
+import { urlForImage } from "@/sanity/lib/image";
 import {
+  CartData,
+  cartItems,
   decreaseCartQuantity,
   increaseCartQuantity,
-  onRemove,
 } from "@/redux/addToCart";
-import getStripe from "../lib/getStripe";
-import { toast } from "react-hot-toast";
-import { urlForImage } from "@/sanity/lib/image";
-import { useState, useEffect } from "react";
-import Cookie from "js-cookie";
+
 const Cart = async () => {
-  const [cartData, setCartData] = useState<any>([]);
   const { cart, totalquantity, totalPrice } = useAppSelector(
     (state) => state.addedItems
   );
+
+  const cookie = Cookie.get("user_id");
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleCheckout = async () => {
@@ -41,78 +50,108 @@ const Cart = async () => {
     if (result?.error) {
       toast("Error");
     }
-    setCartData([]);
   };
-  const getData = async () => {
-    const res = await fetch("/api/cartTable");
-    const { data } = await res.json();
-    setCartData(data);
-    return data;
+  const removeCookie = () => {
+    Cookie.remove("user_id", { path: "" });
   };
-  const cookie = Cookie.get("user_id");
-
+  const handleDelete = async (id: number) => {
+    const hasConfirm = confirm(`Are you sure you want to delete`);
+    if (hasConfirm) {
+      try {
+        await fetch(`http://localhost:3000/api/cartTable?id=${id}`, {
+          method: "DELETE",
+        });
+        router.refresh();
+      } catch (error) {
+        console.log("product not deleted", error);
+      }
+    }
+  };
   useEffect(() => {
-    getData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/cartTable?user_id=${cookie}`
+        );
+        const { data } = await res.json();
+        router.refresh();
+        dispatch(CartData(data));
+      } catch (error) {
+        console.log("error while in calculating");
+      }
+    };
+    if (cookie) {
+      fetchData();
+    }
+  }, [dispatch, cookie, router]);
+
   return (
     <section className="md:px-32 px-7">
-      {cartData.length ? (
+      {cart.length ? (
         <div className="h-[400px] overflow-auto">
-          {cartData
-            .filter((item: any) => item?.user_id === cookie)
-            .map((currElem: any, ind: number) => (
-              <div
-                key={ind}
-                className="flex md:flex-row border flex-col justify-between md:items-center m-4 items-start md:p-0 p-4"
-              >
-                <div className="flex md:flex-row flex-col gap-5">
-                  <Image
-                    src={urlForImage(currElem.image).url()}
-                    alt="error"
-                    width={150}
-                    height={150}
-                    className="cart-product-image"
-                  />
-                  <div className="mt-8 flex flex-col gap-4">
-                    <h5>Name | {currElem.name}</h5>
-                    <h5>Category | {currElem.category}</h5>
-                    <h5>item | {currElem.item}</h5>
-                    <h5>Price | {currElem.price}</h5>
-                  </div>
+          {cart.map((currElem: cartItems) => (
+            <div
+              key={currElem.id}
+              className="flex md:flex-row border flex-col justify-between md:items-center m-4 items-start md:p-0 p-4"
+            >
+              <div className="flex md:flex-row flex-col gap-5">
+                <Image
+                  src={urlForImage(currElem.image).url()}
+                  alt="error"
+                  width={150}
+                  height={150}
+                  className="cart-product-image"
+                />
+                <div className="mt-8 flex flex-col gap-4">
+                  <h5>Name | {currElem.name}</h5>
+                  <h5>Category | {currElem.category}</h5>
+                  <h5>item | {currElem.item}</h5>
+                  <h5>Price | {currElem.price}</h5>
                 </div>
-                <div className="flex gap-8 md:flex-col flex-row items-center md:items-end">
-                  <div className="">
-                    <TiDeleteOutline
-                      className="text-xl cursor-pointer"
-                      onClick={() => dispatch(onRemove(currElem))}
-                    />
-                  </div>
-                  <div className="flex bottom">
-                    <div>
-                      <p className="quantity-desc flex  items-center">
-                        <span className="minus">
-                          <AiOutlineMinus
-                            onClick={() =>
-                              dispatch(decreaseCartQuantity(currElem))
-                            }
-                          />
-                        </span>
-                        <span className="num">{currElem.quantity}</span>
-                        <span className="plus">
-                          <AiOutlinePlus
-                            onClick={() =>
-                              dispatch(increaseCartQuantity(currElem))
-                            }
-                          />
-                        </span>
-                      </p>
-                    </div>
+              </div>
+
+              <div className="flex gap-8 md:flex-col flex-row items-center md:items-end">
+                <div className="">
+                  <TiDeleteOutline
+                    className="text-xl cursor-pointer"
+                    onClick={() => {
+                      handleDelete(currElem.id);
+                    }}
+                  />
+                </div>
+
+                <div className="flex bottom">
+                  <div>
+                    <p className="quantity-desc flex  items-center">
+                      <span className="minus">
+                        <AiOutlineMinus
+                          onClick={() => {
+                            dispatch(decreaseCartQuantity(currElem.id));
+                          }}
+                        />
+                      </span>
+                      <span className="num">{currElem.quantity}</span>
+                      <span className="plus">
+                        <AiOutlinePlus
+                          onClick={() => {
+                            dispatch(increaseCartQuantity(currElem.id));
+                          }}
+                        />
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
           <div className="p-8 flex justify-center items-center">
-            <button className="border p-2" onClick={handleCheckout}>
+            <button
+              className="border p-2"
+              onClick={() => {
+                handleCheckout();
+                removeCookie();
+              }}
+            >
               Process Order
             </button>
           </div>

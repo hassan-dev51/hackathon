@@ -3,7 +3,7 @@ import { pgTable, varchar, serial, integer } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 
 import { sql } from "@vercel/postgres";
-import { cookies } from "next/headers";
+import { InferModel } from "drizzle-orm";
 
 export const cart = pgTable("cart", {
   id: serial("id").primaryKey(),
@@ -16,9 +16,5 @@ export const cart = pgTable("cart", {
   category: varchar("category", { length: 255 }).notNull(),
 });
 
+export type CartTypes = InferModel<typeof cart>;
 export const db = drizzle(sql);
-export const cookieFunction = () => {
-  const cookie = cookies();
-  const getCookie = cookie.get("user_id");
-  return getCookie;
-};

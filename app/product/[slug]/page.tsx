@@ -10,19 +10,36 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { getImageUrl } from "@/app/products/page";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { decrementQuantity, incrementQuantity, onAdd } from "@/redux/addToCart";
+import { decrementQuantity, incrementQuantity } from "@/redux/addToCart";
+import { toast } from "react-hot-toast";
 
+export interface productType {
+  category: string;
+  image: string;
+  item: string;
+  name: string;
+  price: number;
+  slug: {
+    current: string;
+  };
+}
 const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const { quantity } = useAppSelector((state) => state.addedItems);
   const dispatch = useAppDispatch();
-  const [product, setProduct] = useState<any>([]);
+  const [product, setProduct] = useState([]);
 
-  const AddIntoDatabase = async (product: any, quantity: any) => {
+  const AddIntoDatabase = async (product: productType, quantity: number) => {
     const res = await fetch("/api/cartTable", {
       method: "POST",
       body: JSON.stringify({ product: product, quantity: quantity }),
     });
-    return res.json;
+
+    if (res.ok) {
+      toast.success(`${product.name} Added`);
+    } else {
+      toast.error("Failed to add item to the cart");
+    }
+    return res.json();
   };
   useEffect(() => {
     const query = '*[_type=="product"]';
@@ -33,12 +50,13 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
     <div className="flex flex-col md:flex-row justify-start gap-7 md:px-32 px-4 mt-12">
       {product
         .filter(
-          (filterProduct: any) => filterProduct.slug.current === params.slug
+          (filterProduct: productType) =>
+            filterProduct.slug.current === params.slug
         )
-        .map((currProduct: any) => (
-          <div className="product-card" key={currProduct.slug}>
+        .map((currProduct: productType, index: number) => (
+          <div className="product-card" key={index}>
             <Image
-              //@ts-ignore
+              // @ts-ignore
               src={getImageUrl(currProduct)}
               alt="error"
               width={350}
@@ -79,9 +97,6 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
                 <button
                   className="bg-black text-white w-[140px] gap-5 flex p-4 justify-end items-center"
                   onClick={() => {
-                    dispatch(
-                      onAdd({ product: currProduct, quantity: quantity })
-                    );
                     AddIntoDatabase(currProduct, quantity);
                   }}
                 >

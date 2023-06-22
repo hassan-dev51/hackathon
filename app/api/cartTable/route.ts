@@ -2,9 +2,17 @@ import { cart, db } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 } from "uuid";
 import { cookies } from "next/headers";
+import { eq } from "drizzle-orm";
+type params = {
+  params: {
+    id: number;
+  };
+};
 export async function GET(req: NextRequest) {
+  const reqUrl = req.nextUrl;
+  const newUrl = reqUrl.searchParams.get("user_id") as string;
   try {
-    const res = await db.select().from(cart);
+    const res = await db.select().from(cart).where(eq(cart.user_id, newUrl));
 
     return NextResponse.json({ data: res });
   } catch (error) {
@@ -50,5 +58,20 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.log((error as { message: string }).message);
     return NextResponse.json("Error in get request");
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const request = req.nextUrl;
+  const idToNumber = request.searchParams.get("id");
+  const id = Number(idToNumber);
+  try {
+    await db.delete(cart).where(eq(cart.id, id));
+    return NextResponse.json({ message: "Product deleted" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Failed to delete prompt" },
+      { status: 500 }
+    );
   }
 }

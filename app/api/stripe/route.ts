@@ -24,9 +24,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: item.product.name,
+              name: item.name,
             },
-            unit_amount: item.product.price * 100,
+            unit_amount: item.price * 100,
           },
           adjustable_quantity: {
             enabled: true,
