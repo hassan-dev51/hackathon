@@ -74,7 +74,6 @@ const Cart = async () => {
           `http://localhost:3000/api/cartTable?user_id=${cookie}`
         );
         const { data } = await res.json();
-        router.refresh();
         dispatch(CartData(data));
       } catch (error) {
         console.log("error while in calculating");
@@ -83,7 +82,7 @@ const Cart = async () => {
     if (cookie) {
       fetchData();
     }
-  }, [dispatch, cookie, router]);
+  }, [dispatch, cookie]);
 
   return (
     <section className="md:px-32 px-7">
