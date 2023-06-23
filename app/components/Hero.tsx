@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { SlBasket } from "react-icons/sl";
 
 import { Sora } from "next/font/google";

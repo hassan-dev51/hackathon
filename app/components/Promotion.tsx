@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+
 import { Sora } from "next/font/google";
 
 const sora = Sora({ subsets: ["latin"] });
