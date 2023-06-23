@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -28,6 +28,7 @@ const Cart = async () => {
   const { cart, totalquantity, totalPrice } = useAppSelector(
     (state) => state.addedItems
   );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const cookie = Cookie.get("user_id");
   const router = useRouter();
@@ -45,7 +46,7 @@ const Cart = async () => {
     });
 
     const data = await response.json();
-
+    setIsLoading(true);
     const result = await stripe?.redirectToCheckout({ sessionId: data.id });
     if (result?.error) {
       toast("Error");
@@ -143,13 +144,14 @@ const Cart = async () => {
           ))}
           <div className="p-8 flex justify-center items-center">
             <button
-              className="border p-2"
+              className="border p-2 bg-green-500"
+              disabled={isLoading ? true : false}
               onClick={() => {
                 handleCheckout();
                 removeCookie();
               }}
             >
-              Process Order
+              {isLoading ? "Loading..." : " Process order"}
             </button>
           </div>
         </div>

@@ -25,12 +25,14 @@ const Promotion = () => {
               </h2>
               <p className="capitalize text-sm">for the summer season</p>
             </div>
-            <Image
-              src={"/images/event1.png"}
-              alt="event1"
-              width={300}
-              height={200}
-            />
+            <div className="relative aspect-video">
+              <Image
+                src={"/images/event1.png"}
+                alt="event1"
+                width={300}
+                height={200}
+              />
+            </div>
           </div>
 
           <div className="bg-[#242124]  text-white text-center py-9">
