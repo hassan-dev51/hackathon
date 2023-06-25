@@ -62,7 +62,7 @@ const Cart = async () => {
         await fetch(`/api/cartTable?id=${id}`, {
           method: "DELETE",
         });
-        router.refresh();
+        window.location.reload();
       } catch (error) {
         console.log("product not deleted", error);
       }
