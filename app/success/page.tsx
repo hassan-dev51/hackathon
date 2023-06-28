@@ -4,11 +4,16 @@ import Link from "next/link";
 import { BsBagCheckFill } from "react-icons/bs";
 
 import { runFireworks } from "../lib/fireworks";
+import Cookie from "js-cookie";
 
 const Success = () => {
   useEffect(() => {
+    const removeCookie = () => {
+      Cookie.remove("user_id", { path: "" });
+    };
     localStorage.clear();
     runFireworks();
+    removeCookie();
   });
   return (
     <div className="success-wrapper">

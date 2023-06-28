@@ -31,7 +31,6 @@ const Cart = async () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const cookie = Cookie.get("user_id");
-  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleCheckout = async () => {
@@ -52,9 +51,7 @@ const Cart = async () => {
       toast("Error");
     }
   };
-  const removeCookie = () => {
-    Cookie.remove("user_id", { path: "" });
-  };
+
   const handleDelete = async (id: number) => {
     const hasConfirm = confirm(`Are you sure you want to delete`);
     if (hasConfirm) {
@@ -148,7 +145,6 @@ const Cart = async () => {
               disabled={isLoading ? true : false}
               onClick={() => {
                 handleCheckout();
-                removeCookie();
               }}
             >
               {isLoading ? "Loading..." : " Process order"}
