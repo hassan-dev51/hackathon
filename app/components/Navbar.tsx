@@ -10,7 +10,9 @@ import { useState } from "react";
 const sora = Sora({ subsets: ["latin"] });
 const Navbar = () => {
   const { totalquantity } = useAppSelector((state) => state.addedItems);
+
   const [toggle, setToggle] = useState(false);
+
   return (
     <div>
       <nav

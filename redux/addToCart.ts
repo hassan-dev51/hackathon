@@ -56,6 +56,7 @@ const addToCartSlice = createSlice({
 
       state.quantity = 1;
     },
+
     increaseCartQuantity: (state, action) => {
       console.log("increase qunaitity ", action.payload);
       let foundProduct = state.cart.find((item) => item.id === action.payload);

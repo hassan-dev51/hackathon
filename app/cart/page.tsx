@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import Cookie from "js-cookie";
 import { toast } from "react-hot-toast";
@@ -29,11 +28,11 @@ const Cart = async () => {
     (state) => state.addedItems
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const cookie = Cookie.get("user_id");
   const dispatch = useAppDispatch();
 
   const handleCheckout = async () => {
+    setIsLoading(true);
     const stripe = await getStripe();
 
     const response = await fetch("/api/stripe", {
@@ -45,7 +44,7 @@ const Cart = async () => {
     });
 
     const data = await response.json();
-    setIsLoading(true);
+    setIsLoading(false);
     const result = await stripe?.redirectToCheckout({ sessionId: data.id });
     if (result?.error) {
       toast("Error");
@@ -65,6 +64,7 @@ const Cart = async () => {
       }
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -3,11 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 } from "uuid";
 import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
-type params = {
-  params: {
-    id: number;
-  };
-};
+
 export async function GET(req: NextRequest) {
   const reqUrl = req.nextUrl;
   const newUrl = reqUrl.searchParams.get("user_id") as string;

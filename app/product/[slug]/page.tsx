@@ -10,8 +10,13 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { getImageUrl } from "@/app/products/page";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { decrementQuantity, incrementQuantity } from "@/redux/addToCart";
+import {
+  CartData,
+  decrementQuantity,
+  incrementQuantity,
+} from "@/redux/addToCart";
 import { toast } from "react-hot-toast";
+import Cookies from "js-cookie";
 
 export interface productType {
   category: string;
@@ -27,20 +32,34 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const { quantity } = useAppSelector((state) => state.addedItems);
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const cookie = Cookies.get("user_id");
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`/api/cartTable?user_id=${cookie}`);
+      const { data } = await res.json();
+      dispatch(CartData(data));
+    } catch (error) {
+      console.log("error while in calculating");
+    }
+  };
 
   const AddIntoDatabase = async (product: productType, quantity: number) => {
+    setLoading(true);
     const res = await fetch("/api/cartTable", {
       method: "POST",
       body: JSON.stringify({ product: product, quantity: quantity }),
     });
-
     if (res.ok) {
       toast.success(`${product.name} Added`);
+      fetchData();
+      setLoading(false);
     } else {
       toast.error("Failed to add item to the cart");
     }
     return res.json();
   };
+
   useEffect(() => {
     const query = '*[_type=="product"]';
     client.fetch(query).then((data) => setProduct(data));
@@ -103,7 +122,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
                   <SlBasket className="text-3xl" />
 
                   <h3 className="text-center leading-4">
-                    Add <br /> to Cart
+                    {loading ? "loading..." : "Add to Cart"}
                   </h3>
                 </button>
               </div>

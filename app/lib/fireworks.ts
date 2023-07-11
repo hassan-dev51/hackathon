@@ -1,5 +1,5 @@
+import { useAppDispatch } from "@/redux/hooks";
 import confetti from "canvas-confetti";
-
 export const runFireworks = () => {
   var duration = 5 * 1000;
   var animationEnd = Date.now() + duration;
