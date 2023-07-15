@@ -33,16 +33,6 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const cookie = Cookies.get("user_id");
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`/api/cartTable?user_id=${cookie}`);
-      const { data } = await res.json();
-      dispatch(CartData(data));
-    } catch (error) {
-      console.log("error while in calculating");
-    }
-  };
 
   const AddIntoDatabase = async (product: productType, quantity: number) => {
     setLoading(true);
@@ -51,13 +41,16 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
       body: JSON.stringify({ product: product, quantity: quantity }),
     });
     if (res.ok) {
+      const result = await res.json();
+      const { message, res: resultData } = result;
       toast.success(`${product.name} Added`);
-      fetchData();
+      dispatch(CartData(resultData));
       setLoading(false);
     } else {
       toast.error("Failed to add item to the cart");
     }
-    return res.json();
+
+    // return res.json();
   };
 
   useEffect(() => {
