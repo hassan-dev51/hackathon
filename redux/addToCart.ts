@@ -43,8 +43,9 @@ const addToCartSlice = createSlice({
 
     CartData: (state, action) => {
       state.cart = action.payload;
+
       state.totalquantity = state.cart.reduce(
-        (total, item) => (total = item.quantity),
+        (total, item) => total + item.quantity,
         0
       );
       console.log(state.totalquantity, "after function");
