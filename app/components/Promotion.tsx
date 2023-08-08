@@ -59,12 +59,9 @@ const Promotion = () => {
                 <del>$100.00</del> <span className="font-bold">$75.00</span>
               </p>
             </div>
-            <Image
-              src={"/images/event2.png"}
-              alt="event2"
-              width={350}
-              height={120}
-            />
+            <div className="relative h-[350px] w-[305px] object-cover">
+              <Image src={"/images/event2.png"} alt="event2" fill />
+            </div>
           </div>
           <div className="bg-[#D7D7D9]">
             <div className="p-4">
@@ -73,7 +70,9 @@ const Promotion = () => {
                 <del>$225.00</del> <span className="font-bold">$190.00</span>
               </p>
             </div>
-            <Image src={"/images/p1.png"} alt="p1" width={400} height={120} />
+            <div className="relative h-[350px] w-[305px]">
+              <Image src={"/images/p1.png"} alt="p1" fill />
+            </div>
           </div>
         </div>
       </div>

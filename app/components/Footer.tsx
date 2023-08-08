@@ -97,7 +97,7 @@ const Footer = () => {
           <span className="text-gray-500">Code by. </span>
           <span className="font-bold">
             Hassan Ali
-            <br /> on github
+            <br /> <Link href="">on github</Link>
           </span>
         </p>
       </div>

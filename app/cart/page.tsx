@@ -141,7 +141,7 @@ const Cart = async () => {
           ))}
           <div className="p-8 flex justify-center items-center">
             <button
-              className="border p-2 bg-green-500"
+              className="border p-2 bg-green-300"
               disabled={isLoading ? true : false}
               onClick={() => {
                 handleCheckout();

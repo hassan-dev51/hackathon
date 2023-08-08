@@ -16,8 +16,6 @@ import {
   incrementQuantity,
 } from "@/redux/addToCart";
 import { toast } from "react-hot-toast";
-import Cookies from "js-cookie";
-
 export interface productType {
   category: string;
   image: string;
@@ -42,17 +40,17 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
     });
     if (res.ok) {
       const result = await res.json();
-      const { message, res: resultData } = result;
+      const { res: resultData } = result;
+
       toast.success(`${product.name} Added`);
+
       dispatch(CartData(resultData));
+
       setLoading(false);
     } else {
       toast.error("Failed to add item to the cart");
     }
-
-    // return res.json();
   };
-
   useEffect(() => {
     const query = '*[_type=="product"]';
     client.fetch(query).then((data) => setProduct(data));
@@ -73,6 +71,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
               alt="error"
               width={350}
               height={300}
+              sizes="(max-width:768) 100vw ,(max-width:1200px) 50vw, 33vw"
               className="product-image"
             />
             <p className="product-name">{currProduct.name}</p>

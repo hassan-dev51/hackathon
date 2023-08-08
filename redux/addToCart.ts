@@ -39,16 +39,15 @@ const addToCartSlice = createSlice({
       } else {
         state.quantity = 1;
       }
-      console.log(state.cart, "cart");
     },
 
     CartData: (state, action) => {
       state.cart = action.payload;
-
       state.totalquantity = state.cart.reduce(
-        (total, item) => total + item.quantity,
+        (total, item) => (total += item.quantity),
         0
       );
+      console.log(state.totalquantity, "after function");
       state.totalPrice = state.cart.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
@@ -58,7 +57,6 @@ const addToCartSlice = createSlice({
     },
 
     increaseCartQuantity: (state, action) => {
-      console.log("increase qunaitity ", action.payload);
       let foundProduct = state.cart.find((item) => item.id === action.payload);
       if (foundProduct) {
         foundProduct.quantity += 1;
@@ -67,8 +65,6 @@ const addToCartSlice = createSlice({
       }
     },
     decreaseCartQuantity: (state, action) => {
-      console.log("decrease qunaitity ", action.payload);
-
       let foundProduct = state.cart.find((item) => item.id === action.payload);
       if (foundProduct && foundProduct.quantity > 1) {
         foundProduct.quantity -= 1;

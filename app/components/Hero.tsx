@@ -23,7 +23,7 @@ const Hero = () => {
         </p>
 
         <Link
-          href={""}
+          href={"/products"}
           className="bg-black text-white w-[140px] flex p-4 justify-end items-center"
         >
           <SlBasket className="text-3xl " />
