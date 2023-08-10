@@ -42,13 +42,17 @@ const addToCartSlice = createSlice({
     },
 
     CartData: (state, action) => {
-      state.cart = action.payload;
+      const newItems = action.payload.filter(
+        (newItem: any) => !state.cart.some((item) => item.id === newItem.id)
+      );
+
+      state.cart = [...state.cart, ...newItems];
 
       state.totalquantity = state.cart.reduce(
         (total, item) => total + item.quantity,
         0
       );
-      console.log(state.totalquantity, "after function");
+
       state.totalPrice = state.cart.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
